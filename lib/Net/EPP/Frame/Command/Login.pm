@@ -2,7 +2,7 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Login.pm,v 1.2 2006/01/09 13:24:42 gavin Exp $
+# $Id: Login.pm,v 1.3 2006/01/09 17:05:50 gavin Exp $
 package Net::EPP::Frame::Command::Login;
 use base qw(Net::EPP::Frame::Command);
 use strict;
@@ -11,7 +11,7 @@ use strict;
 
 =head1 NAME
 
-Net::EPP::Frame::Command::Check - an instance of L<Net::EPP::Frame::Command>
+Net::EPP::Frame::Command::Login - an instance of L<Net::EPP::Frame::Command>
 for the EPP C<E<lt>loginE<gt>> command.
 
 =head1 OBJECT HIERARCHY
