@@ -2,7 +2,7 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Frame.pm,v 1.7 2006/06/12 10:07:59 gavin Exp $
+# $Id: Frame.pm,v 1.8 2006/06/12 11:20:02 gavin Exp $
 package Net::EPP::Frame;
 use Carp;
 use Net::EPP::Frame::Command;
@@ -16,7 +16,7 @@ use base qw(XML::LibXML::Document);
 use vars qw($VERSION $EPP_URN $SCHEMA_URI);
 use strict;
 
-our $VERSION	= '0.03';
+our $VERSION	= '0.04';
 our $EPP_URN	= 'urn:ietf:params:xml:ns:epp-1.0';
 our $SCHEMA_URI	= 'http://www.w3.org/2001/XMLSchema-instance';
 
@@ -234,6 +234,35 @@ sub getNode {
 		croak('Invalid number of arguments to getNode()');
 
 	}
+}
+
+=pod
+
+	my $binary = $frame->header;
+
+Returns a scalar containing the frame length packed into binary. This is
+only useful for low-level protocol stuff.
+
+=cut
+
+sub header {
+	my $self = shift;
+	return pack('N', length($self->toString) + 4).$self->toString;
+}
+
+=pod
+
+	my $data = $frame->frame;
+
+Returns a scalar containing the frame header (see the I<header()> method
+above) concatenated with the XML frame itself. This is only useful for
+low-level protocol stuff.
+
+=cut
+
+sub frame {
+	my $self = shift;
+	return $self->header.$self->toString;
 }
 
 =pod
