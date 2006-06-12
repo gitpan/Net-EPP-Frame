@@ -2,8 +2,9 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Info.pm,v 1.3 2006/01/09 17:05:50 gavin Exp $
+# $Id: Info.pm,v 1.4 2006/05/24 11:14:27 gavin Exp $
 package Net::EPP::Frame::Command::Info;
+use Net::EPP::Frame::Command::Info::Domain;
 use base qw(Net::EPP::Frame::Command);
 use strict;
 

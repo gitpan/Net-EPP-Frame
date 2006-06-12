@@ -2,7 +2,7 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Response.pm,v 1.4 2006/01/09 17:05:50 gavin Exp $
+# $Id: Response.pm,v 1.5 2006/05/02 16:04:52 gavin Exp $
 package Net::EPP::Frame::Response;
 use base qw(Net::EPP::Frame);
 
@@ -10,7 +10,7 @@ use base qw(Net::EPP::Frame);
 
 =head1 NAME
 
-Net::EPP::Frame::Response - an instance of L<Net::EPP::Hello> for server responses
+Net::EPP::Frame::Response - an instance of L<Net::EPP::Frame> for server responses
 
 =head1 DESCRIPTION
 
@@ -33,7 +33,7 @@ C<E<lt>commandE<gt>> frame.
 sub _addExtraElements {
 	my $self = shift;
 	$self->response->addChild($self->createElement('result'));
-	$self->result->addChild($self->createElement('resData'));
+	$self->addChild($self->createElement('resData'));
 	$self->result->setAttribute('code' => '');
 	my $trID = $self->createElement('trID');
 	$trID->addChild($self->createElement('clTRID'));

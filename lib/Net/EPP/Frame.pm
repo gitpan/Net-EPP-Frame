@@ -2,7 +2,7 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Frame.pm,v 1.5 2006/01/09 17:06:10 gavin Exp $
+# $Id: Frame.pm,v 1.7 2006/06/12 10:07:59 gavin Exp $
 package Net::EPP::Frame;
 use Carp;
 use Net::EPP::Frame::Command;
@@ -16,7 +16,7 @@ use base qw(XML::LibXML::Document);
 use vars qw($VERSION $EPP_URN $SCHEMA_URI);
 use strict;
 
-our $VERSION	= '0.02';
+our $VERSION	= '0.03';
 our $EPP_URN	= 'urn:ietf:params:xml:ns:epp-1.0';
 our $SCHEMA_URI	= 'http://www.w3.org/2001/XMLSchema-instance';
 
@@ -212,16 +212,28 @@ sub formatTimeStamp {
 =pod
 
 	my $node = $frame->getNode($id);
+	my $node = $frame->getNode($ns, $id);
 
 This is another convenience method. It uses C<$id> with the
 I<getElementsByTagName()> method to get a list of nodes with that element name,
 and simply returns the first L<XML::LibXML::Element> from the list.
 
+If C<$ns> is provided, then I<getElementsByTagNameNS()> is used.
+
 =cut
 
 sub getNode {
-	my ($self, $name) = @_;
-	return ($self->getElementsByTagName($name))[0];
+	my ($self, @args) = @_;
+	if (scalar(@args) == 2) {
+		return ($self->getElementsByTagNameNS(@args))[0];
+
+	} elsif (scalar(@args) == 1) {
+		return ($self->getElementsByTagName($args[0]))[0];
+
+	} else {
+		croak('Invalid number of arguments to getNode()');
+
+	}
 }
 
 =pod

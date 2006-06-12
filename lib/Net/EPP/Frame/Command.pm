@@ -2,7 +2,7 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Command.pm,v 1.2 2006/01/09 13:24:42 gavin Exp $
+# $Id: Command.pm,v 1.3 2006/05/09 11:37:27 gavin Exp $
 package Net::EPP::Frame::Command;
 use Net::EPP::Frame::Command::Check;
 use Net::EPP::Frame::Command::Create;
@@ -106,11 +106,10 @@ C<E<lt>clTRIDE<gt>> element.
 
 sub getCommandType {
 	my $self = shift;
-
 	my $type = ref($self);
 	my $me = __PACKAGE__;
 	$type =~ s/^$me\:+//;
-
+	$type =~ s/\:{2}.+//;
 	return lc($type);
 }
 

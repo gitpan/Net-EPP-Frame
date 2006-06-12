@@ -2,7 +2,7 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Hello.pm,v 1.2 2006/01/09 13:24:42 gavin Exp $
+# $Id: Hello.pm,v 1.3 2006/05/02 16:04:52 gavin Exp $
 package Net::EPP::Frame::Hello;
 use base qw(Net::EPP::Frame);
 
@@ -10,7 +10,7 @@ use base qw(Net::EPP::Frame);
 
 =head1 NAME
 
-Net::EPP::Frame::Hello - an instance of L<Net::EPP::Hello> for client greetings
+Net::EPP::Frame::Hello - an instance of L<Net::EPP::Frame> for client greetings
 
 =head1 DESCRIPTION
 
