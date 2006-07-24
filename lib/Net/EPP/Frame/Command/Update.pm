@@ -2,8 +2,10 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Update.pm,v 1.2 2006/01/09 13:24:42 gavin Exp $
+# $Id: Update.pm,v 1.3 2006/07/04 14:18:02 gavin Exp $
 package Net::EPP::Frame::Command::Update;
+use Net::EPP::Frame::Command::Update::Contact;
+use Net::EPP::Frame::Command::Update::Domain;
 use base qw(Net::EPP::Frame::Command);
 use strict;
 
@@ -24,8 +26,37 @@ for the EPP C<E<lt>updateE<gt>> command.
 
 =head1 METHODS
 
-This module does not define any methods in addition to those it inherits from
-its ancestors.
+=cut
+
+sub add {
+	my $self = shift;
+	foreach my $el ($self->getNode('update')->getChildNodes->shift->getChildNodes) {
+		return $el if ($el->localname eq 'contact:add');
+	}
+}
+
+sub rem {
+	my $self = shift;
+	foreach my $el ($self->getNode('update')->getChildNodes->shift->getChildNodes) {
+		return $el if ($el->localname eq 'contact:rem');
+	}
+}
+
+sub chg {
+	my $self = shift;
+	foreach my $el ($self->getNode('update')->getChildNodes->shift->getChildNodes) {
+		return $el if ($el->localname eq 'contact:chg');
+	}
+}
+
+=pod
+
+	my $el = $frame->add;
+	my $el = $frame->rem;
+	my $el = $frame->chg;
+
+These methods return the elements that should be used to contain the changes
+to be made to the object (ie C<domain:add>, C<domain:rem>, C<domain:chg>).
 
 =head1 AUTHOR
 

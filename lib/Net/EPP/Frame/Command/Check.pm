@@ -2,10 +2,12 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Check.pm,v 1.3 2006/05/09 11:37:27 gavin Exp $
+# $Id: Check.pm,v 1.4 2006/07/11 11:40:02 gavin Exp $
 package Net::EPP::Frame::Command::Check;
 use base qw(Net::EPP::Frame::Command);
 use Net::EPP::Frame::Command::Check::Domain;
+use Net::EPP::Frame::Command::Check::Contact;
+use Net::EPP::Frame::Command::Check::Host;
 use strict;
 
 =pod

@@ -2,9 +2,10 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Create.pm,v 1.2 2006/01/09 13:24:42 gavin Exp $
+# $Id: Create.pm,v 1.3 2006/07/12 13:11:54 gavin Exp $
 package Net::EPP::Frame::Command::Create;
 use base qw(Net::EPP::Frame::Command);
+use Net::EPP::Frame::Command::Create::Contact;
 use strict;
 
 =pod

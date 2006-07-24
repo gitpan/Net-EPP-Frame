@@ -2,10 +2,12 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Delete.pm,v 1.3 2006/06/03 09:45:06 gavin Exp $
+# $Id: Delete.pm,v 1.4 2006/07/12 13:11:54 gavin Exp $
 package Net::EPP::Frame::Command::Delete;
 use base qw(Net::EPP::Frame::Command);
+use Net::EPP::Frame::Command::Delete::Contact;
 use Net::EPP::Frame::Command::Delete::Domain;
+use Net::EPP::Frame::Command::Delete::Host;
 use strict;
 
 =pod

@@ -2,9 +2,9 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Domain.pm,v 1.3 2006/07/11 11:40:02 gavin Exp $
-package Net::EPP::Frame::Command::Check::Domain;
-use base qw(Net::EPP::Frame::Command::Check);
+# $Id: Domain.pm,v 1.1 2006/07/04 14:18:02 gavin Exp $
+package Net::EPP::Frame::Command::Update::Domain;
+use base qw(Net::EPP::Frame::Command::Update);
 use Net::EPP::Frame::ObjectSpec;
 use strict;
 
@@ -12,20 +12,18 @@ use strict;
 
 =head1 NAME
 
-Net::EPP::Frame::Command::Check::Domain - an instance of L<Net::EPP::Frame::Command::Check>
+Net::EPP::Frame::Command::Update::Domain - an instance of L<Net::EPP::Frame::Command::Update>
 for domain names.
 
 =head1 SYNOPSIS
 
-	use Net::EPP::Frame::Command::Check::Domain;
+	use Net::EPP::Frame::Command::Update::Domain;
 	use strict;
 
-	my $check = Net::EPP::Frame::Command::Check::Domain->new;
-	$check->addDomain('example-1.tld');
-	$check->addDomain('example-2.tld');
-	$check->addDomain('example-2.tld');
+	my $info = Net::EPP::Frame::Command::Update::Domain->new;
+	$info->setDomain('example.tld');
 
-	print $check->toString(1);
+	print $info->toString(1);
 
 This results in an XML document like this:
 
@@ -35,16 +33,14 @@ This results in an XML document like this:
 	  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0
 	  epp-1.0.xsd">
 	    <command>
-	      <check>
-	        <domain:check
+	      <info>
+	        <domain:update
 	          xmlns:domain="urn:ietf:params:xml:ns:domain-1.0"
 	          xsi:schemaLocation="urn:ietf:params:xml:ns:domain-1.0
 	          domain-1.0.xsd">
 	            <domain:name>example-1.tldE<lt>/domain:name>
-	            <domain:name>example-2.tldE<lt>/domain:name>
-	            <domain:name>example-3.tldE<lt>/domain:name>
-	        </domain:check>
-	      </check>
+	        </domain:update>
+	      </info>
 	      <clTRID>0cf1b8f7e14547d26f03b7641660c641d9e79f45</clTRIDE<gt>
 	    </command>
 	</epp>
@@ -55,16 +51,21 @@ This results in an XML document like this:
     +----L<XML::LibXML::Document>
         +----L<Net::EPP::Frame>
             +----L<Net::EPP::Frame::Command>
-                +----L<Net::EPP::Frame::Command::Check>
-                    +----L<Net::EPP::Frame::Command::Check::Domain>
+                +----L<Net::EPP::Frame::Command::Update>
+                    +----L<Net::EPP::Frame::Command::Update::Domain>
 
 =cut
 
 sub new {
 	my $package = shift;
-	my $self = bless($package->SUPER::new('check'), $package);
+	my $self = bless($package->SUPER::new('update'), $package);
 
-	$self->addObject(Net::EPP::Frame::ObjectSpec->spec('domain'));
+	my $domain = $self->addObject(Net::EPP::Frame::ObjectSpec->spec('domain'));
+
+	foreach my $grp (qw(add rem chg)) {
+		my $el = $self->createElement(sprintf('domain:%s', $grp));
+		$self->getNode('update')->getChildNodes->shift->appendChild($el);
+	}
 
 	return $self;
 }
@@ -73,19 +74,19 @@ sub new {
 
 =head1 METHODS
 
-	$frame->addDomain($domain_name);
+	$frame->setDomain($domain_name);
 
-This adds a domain name to the list of domains to be checked.
+This specifies the domain name to be updated.
 
 =cut
 
-sub addDomain {
+sub setDomain {
 	my ($self, $domain) = @_;
 
 	my $name = $self->createElement('domain:name');
 	$name->appendText($domain);
 
-	$self->getNode('check')->getChildNodes->shift->appendChild($name);
+	$self->getNode('update')->getChildNodes->shift->appendChild($name);
 
 	return 1;
 }

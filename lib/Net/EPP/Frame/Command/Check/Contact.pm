@@ -2,8 +2,8 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Domain.pm,v 1.3 2006/07/11 11:40:02 gavin Exp $
-package Net::EPP::Frame::Command::Check::Domain;
+# $Id: Contact.pm,v 1.2 2006/07/12 13:11:54 gavin Exp $
+package Net::EPP::Frame::Command::Check::Contact;
 use base qw(Net::EPP::Frame::Command::Check);
 use Net::EPP::Frame::ObjectSpec;
 use strict;
@@ -12,18 +12,18 @@ use strict;
 
 =head1 NAME
 
-Net::EPP::Frame::Command::Check::Domain - an instance of L<Net::EPP::Frame::Command::Check>
-for domain names.
+Net::EPP::Frame::Command::Check::Contact - an instance of L<Net::EPP::Frame::Command::Check>
+for contact objects.
 
 =head1 SYNOPSIS
 
-	use Net::EPP::Frame::Command::Check::Domain;
+	use Net::EPP::Frame::Command::Check::Contact;
 	use strict;
 
-	my $check = Net::EPP::Frame::Command::Check::Domain->new;
-	$check->addDomain('example-1.tld');
-	$check->addDomain('example-2.tld');
-	$check->addDomain('example-2.tld');
+	my $check = Net::EPP::Frame::Command::Check::Contact->new;
+	$check->addContact('contact-id-01');
+	$check->addContact('contact-id-02');
+	$check->addContact('contact-id-03');
 
 	print $check->toString(1);
 
@@ -36,14 +36,14 @@ This results in an XML document like this:
 	  epp-1.0.xsd">
 	    <command>
 	      <check>
-	        <domain:check
-	          xmlns:domain="urn:ietf:params:xml:ns:domain-1.0"
-	          xsi:schemaLocation="urn:ietf:params:xml:ns:domain-1.0
-	          domain-1.0.xsd">
-	            <domain:name>example-1.tldE<lt>/domain:name>
-	            <domain:name>example-2.tldE<lt>/domain:name>
-	            <domain:name>example-3.tldE<lt>/domain:name>
-	        </domain:check>
+	        <contact:check
+	          xmlns:contact="urn:ietf:params:xml:ns:contact-1.0"
+	          xsi:schemaLocation="urn:ietf:params:xml:ns:contact-1.0
+	          contact-1.0.xsd">
+	            <contact:id>contact-id-01E<lt>/contact:id>
+	            <contact:id>contact-id-02E<lt>/contact:id>
+	            <contact:id>contact-id-03E<lt>/contact:id>
+	        </contact:check>
 	      </check>
 	      <clTRID>0cf1b8f7e14547d26f03b7641660c641d9e79f45</clTRIDE<gt>
 	    </command>
@@ -56,7 +56,7 @@ This results in an XML document like this:
         +----L<Net::EPP::Frame>
             +----L<Net::EPP::Frame::Command>
                 +----L<Net::EPP::Frame::Command::Check>
-                    +----L<Net::EPP::Frame::Command::Check::Domain>
+                    +----L<Net::EPP::Frame::Command::Check::Contact>
 
 =cut
 
@@ -64,7 +64,7 @@ sub new {
 	my $package = shift;
 	my $self = bless($package->SUPER::new('check'), $package);
 
-	$self->addObject(Net::EPP::Frame::ObjectSpec->spec('domain'));
+	$self->addObject(Net::EPP::Frame::ObjectSpec->spec('contact'));
 
 	return $self;
 }
@@ -73,17 +73,17 @@ sub new {
 
 =head1 METHODS
 
-	$frame->addDomain($domain_name);
+	$frame->addContact($contact_id);
 
-This adds a domain name to the list of domains to be checked.
+This adds a contact ID to the list of contacts to be checked.
 
 =cut
 
-sub addDomain {
-	my ($self, $domain) = @_;
+sub addContact {
+	my ($self, $contact) = @_;
 
-	my $name = $self->createElement('domain:name');
-	$name->appendText($domain);
+	my $name = $self->createElement('contact:id');
+	$name->appendText($contact);
 
 	$self->getNode('check')->getChildNodes->shift->appendChild($name);
 
