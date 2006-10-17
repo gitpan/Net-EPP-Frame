@@ -2,7 +2,7 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Frame.pm,v 1.11 2006/10/17 15:18:13 gavin Exp $
+# $Id: Frame.pm,v 1.6 2006/05/09 11:37:27 gavin Exp $
 package Net::EPP::Frame;
 use Carp;
 use Net::EPP::Frame::Command;
@@ -16,7 +16,7 @@ use base qw(XML::LibXML::Document);
 use vars qw($VERSION $EPP_URN $SCHEMA_URI);
 use strict;
 
-our $VERSION	= '0.07';
+our $VERSION	= '0.04';
 our $EPP_URN	= 'urn:ietf:params:xml:ns:epp-1.0';
 our $SCHEMA_URI	= 'http://www.w3.org/2001/XMLSchema-instance';
 
@@ -247,7 +247,7 @@ only useful for low-level protocol stuff.
 
 sub header {
 	my $self = shift;
-	return pack('N', length($self->toString) + 4);
+	return pack('N', length($self->toString) + 4).$self->toString;
 }
 
 =pod

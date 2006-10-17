@@ -2,7 +2,7 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Domain.pm,v 1.1 2006/07/04 14:18:02 gavin Exp $
+# $Id: Domain.pm,v 1.2 2006/08/16 11:28:41 jon Exp $
 package Net::EPP::Frame::Command::Update::Domain;
 use base qw(Net::EPP::Frame::Command::Update);
 use Net::EPP::Frame::ObjectSpec;
@@ -89,6 +89,38 @@ sub setDomain {
 	$self->getNode('update')->getChildNodes->shift->appendChild($name);
 
 	return 1;
+}
+
+=pod
+
+	$frame->addStatus($type, $info);
+
+Add a status of $type with the optional extra $info.
+
+=cut
+sub addStatus {
+	my ($self, $type, $info) = @_;
+	my $status = $self->createElement('domain:status');
+	$status->setAttribute('s', $type);
+	$status->setAttribute('lang', 'en');
+	if ($info) {
+		$status->appendText($info);
+	}
+	$self->getElementsByLocalName('domain:add')->shift->appendChild($status);
+}
+
+=pod
+
+	$frame->remStatus($type);
+
+Remove a status of $type.
+
+=cut
+sub remStatus {
+	my ($self, $type) = @_;
+	my $status = $self->createElement('domain:status');
+	$status->setAttribute('s', $type);
+	$self->getElementsByLocalName('domain:rem')->shift->appendChild($status);
 }
 
 =pod
