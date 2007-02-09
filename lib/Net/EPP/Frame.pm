@@ -2,7 +2,7 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Frame.pm,v 1.11 2006/10/17 15:18:13 gavin Exp $
+# $Id: Frame.pm,v 1.12 2006/12/13 13:54:17 gavin Exp $
 package Net::EPP::Frame;
 use Carp;
 use Net::EPP::Frame::Command;
@@ -16,7 +16,7 @@ use base qw(XML::LibXML::Document);
 use vars qw($VERSION $EPP_URN $SCHEMA_URI);
 use strict;
 
-our $VERSION	= '0.07';
+our $VERSION	= '0.08';
 our $EPP_URN	= 'urn:ietf:params:xml:ns:epp-1.0';
 our $SCHEMA_URI	= 'http://www.w3.org/2001/XMLSchema-instance';
 
@@ -302,6 +302,10 @@ sub frame {
 =item L<Net::EPP::Frame::Response>, for EPP server response frames
 
 =back
+
+Each subclass has its own subclasses for various objects, for example L<Net::EPP::Frame::Command::Check::Domain> creates C<E<lt>checkE<gt>> frame for domain names.
+
+Coverage for all combinations of command and object type is not complete, but work is ongoing.
 
 =head1 AUTHOR
 

@@ -2,19 +2,17 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Poll.pm,v 1.3 2006/12/13 13:54:17 gavin Exp $
-package Net::EPP::Frame::Command::Poll;
-use Net::EPP::Frame::Command::Poll::Req;
-use Net::EPP::Frame::Command::Poll::Ack;
-use base qw(Net::EPP::Frame::Command);
+# $Id: Req.pm,v 1.2 2007/02/09 12:17:03 gavin Exp $
+package Net::EPP::Frame::Command::Poll::Req;
+use base qw(Net::EPP::Frame::Command::Poll);
 use strict;
 
 =pod
 
 =head1 NAME
 
-Net::EPP::Frame::Command::Poll - an instance of L<Net::EPP::Frame::Command>
-for the EPP C<E<lt>PollE<gt>> command.
+Net::EPP::Frame::Command::Poll::Req - an instance of L<Net::EPP::Frame::Command>
+for the EPP C<E<lt>PollE<gt>> request command.
 
 =head1 OBJECT HIERARCHY
 
@@ -23,6 +21,15 @@ for the EPP C<E<lt>PollE<gt>> command.
         +----L<Net::EPP::Frame>
             +----L<Net::EPP::Frame::Command>
                 +----L<Net::EPP::Frame::Command::Poll>
+
+=cut
+
+sub new {
+	my $package = shift;
+	my $self = bless($package->SUPER::new('poll'), $package);
+	$self->getCommandNode->setAttribute('op' => 'req');
+	return $self;
+}
 
 =head1 METHODS
 
