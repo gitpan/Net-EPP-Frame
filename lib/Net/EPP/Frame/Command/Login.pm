@@ -2,7 +2,7 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Login.pm,v 1.3 2006/01/09 17:05:50 gavin Exp $
+# $Id: Login.pm,v 1.4 2007/02/21 13:25:52 gavin Exp $
 package Net::EPP::Frame::Command::Login;
 use base qw(Net::EPP::Frame::Command);
 use strict;
@@ -28,8 +28,8 @@ sub _addCommandElements {
 	my $self = shift;
 	$self->getNode('login')->addChild($self->createElement('clID'));
 	$self->getNode('login')->addChild($self->createElement('pw'));
-	$self->getNode('login')->addChild($self->createElement('svcs'));
 	$self->getNode('login')->addChild($self->createElement('options'));
+	$self->getNode('login')->addChild($self->createElement('svcs'));
 }
 
 =pod
