@@ -2,7 +2,7 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Contact.pm,v 1.2 2006/07/12 13:11:54 gavin Exp $
+# $Id: Contact.pm,v 1.3 2007/11/28 15:07:52 gavin Exp $
 package Net::EPP::Frame::Command::Info::Contact;
 use base qw(Net::EPP::Frame::Command::Info);
 use Net::EPP::Frame::ObjectSpec;
@@ -21,7 +21,7 @@ for contact objects.
 	use strict;
 
 	my $info = Net::EPP::Frame::Command::Info::Contact->new;
-	$info->setID('REG-12345');
+	$info->setContact('REG-12345');
 
 	print $info->toString(1);
 
