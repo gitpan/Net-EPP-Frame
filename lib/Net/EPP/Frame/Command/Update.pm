@@ -1,8 +1,8 @@
-# Copyright (c) 2006 CentralNic Ltd. All rights reserved. This program is
+# Copyright (c) 2007 CentralNic Ltd. All rights reserved. This program is
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Update.pm,v 1.3 2006/07/04 14:18:02 gavin Exp $
+# $Id: Update.pm,v 1.4 2007/12/03 11:44:52 gavin Exp $
 package Net::EPP::Frame::Command::Update;
 use Net::EPP::Frame::Command::Update::Contact;
 use Net::EPP::Frame::Command::Update::Domain;
@@ -60,11 +60,11 @@ to be made to the object (ie C<domain:add>, C<domain:rem>, C<domain:chg>).
 
 =head1 AUTHOR
 
-Gavin Brown (L<epp@centralnic.com>) for CentralNic Ltd (http://www.centralnic.com/).
+CentralNic Ltd (http://www.centralnic.com/).
 
 =head1 COPYRIGHT
 
-This module is (c) 2006 CentralNic Ltd. This module is free software; you can
+This module is (c) 2007 CentralNic Ltd. This module is free software; you can
 redistribute it and/or modify it under the same terms as Perl itself.
 
 =head1 SEE ALSO

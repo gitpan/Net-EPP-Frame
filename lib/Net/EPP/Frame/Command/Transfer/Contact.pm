@@ -2,9 +2,9 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Contact.pm,v 1.3 2007/12/03 11:44:52 gavin Exp $
-package Net::EPP::Frame::Command::Update::Contact;
-use base qw(Net::EPP::Frame::Command::Update);
+# $Id: Contact.pm,v 1.1 2007/12/03 11:44:52 gavin Exp $
+package Net::EPP::Frame::Command::Transfer::Contact;
+use base qw(Net::EPP::Frame::Command::Transfer);
 use Net::EPP::Frame::ObjectSpec;
 use strict;
 
@@ -12,16 +12,17 @@ use strict;
 
 =head1 NAME
 
-Net::EPP::Frame::Command::Update::Contact - an instance of L<Net::EPP::Frame::Command::Update>
+Net::EPP::Frame::Command::Transfer::Contact - an instance of L<Net::EPP::Frame::Command::Transfer>
 for contact objects.
 
 =head1 SYNOPSIS
 
-	use Net::EPP::Frame::Command::Update::Contact;
+	use Net::EPP::Frame::Command::Transfer::Contact;
 	use strict;
 
-	my $info = Net::EPP::Frame::Command::Update::Contact->new;
-	$info->setID('REG-12345');
+	my $info = Net::EPP::Frame::Command::Transfer::Contact->new;
+	$info->setOp('query');
+	$info->setContact('REG-12345');
 
 	print $info->toString(1);
 
@@ -33,14 +34,14 @@ This results in an XML document like this:
 	  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0
 	  epp-1.0.xsd">
 	    <command>
-	      <info>REG-12345
-	        <contact:update
+	      <transfer op="query">
+	        <contact:transfer
 	          xmlns:contact="urn:ietf:params:xml:ns:contact-1.0"
 	          xsi:schemaLocation="urn:ietf:params:xml:ns:contact-1.0
 	          contact-1.0.xsd">
-	            <contact:id>example-1.tldE<lt>/contact:id>
-	        </contact:update>
-	      </info>
+	            <contact:id>REG-12345E<lt>/contact:id>
+	        </contact:transfer>
+	      </transfer>
 	      <clTRID>0cf1b8f7e14547d26f03b7641660c641d9e79f45</clTRIDE<gt>
 	    </command>
 	</epp>
@@ -51,21 +52,16 @@ This results in an XML document like this:
     +----L<XML::LibXML::Document>
         +----L<Net::EPP::Frame>
             +----L<Net::EPP::Frame::Command>
-                +----L<Net::EPP::Frame::Command::Update>
-                    +----L<Net::EPP::Frame::Command::Update::Contact>
+                +----L<Net::EPP::Frame::Command::Transfer>
+                    +----L<Net::EPP::Frame::Command::Transfer::Contact>
 
 =cut
 
 sub new {
 	my $package = shift;
-	my $self = bless($package->SUPER::new('update'), $package);
+	my $self = bless($package->SUPER::new('transfer'), $package);
 
 	my $contact = $self->addObject(Net::EPP::Frame::ObjectSpec->spec('contact'));
-
-	foreach my $grp (qw(add rem chg)) {
-		my $el = $self->createElement(sprintf('contact:%s', $grp));
-		$self->getNode('update')->getChildNodes->shift->appendChild($el);
-	}
 
 	return $self;
 }
@@ -74,19 +70,41 @@ sub new {
 
 =head1 METHODS
 
-	$frame->setContact($id);
+	$frame->setContact($contactID);
 
-This specifies the contact object to be updated.
+This specifies the contact object for the transfer.
 
 =cut
 
 sub setContact {
 	my ($self, $id) = @_;
 
-	my $el = $self->createElement('contact:id');
-	$el->appendText($id);
+	my $name = $self->createElement('contact:id');
+	$name->appendText($id);
 
-	$self->getNode('update')->getChildNodes->shift->appendChild($el);
+	$self->getNode('transfer')->getChildNodes->shift->appendChild($name);
+
+	return 1;
+}
+
+=pod
+
+	$frame->setAuthInfo($pw);
+
+This sets the authInfo code for the transfer.
+
+=cut
+
+sub setAuthInfo {
+	my ($self, $code) = @_;
+
+	my $pw = $self->createElement('contact:pw');
+	$pw->appendText($code);
+
+	my $authInfo = $self->createElement('contact:authInfo');
+	$authInfo->appendChild($pw);
+
+	$self->getNode('transfer')->getChildNodes->shift->appendChild($authInfo);
 
 	return 1;
 }

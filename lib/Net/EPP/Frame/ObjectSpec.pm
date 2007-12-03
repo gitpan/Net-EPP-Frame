@@ -1,4 +1,4 @@
-#! $Id: ObjectSpec.pm,v 1.1 2006/01/09 13:24:42 gavin Exp $
+#! $Id: ObjectSpec.pm,v 1.2 2007/12/03 11:44:51 gavin Exp $
 package Net::EPP::Frame::ObjectSpec;
 use vars qw($VERSION $SPEC);
 use strict;
@@ -50,7 +50,7 @@ Net::EPP::Frame::ObjectSpec - metadata about EPP object types
 
 =head1 DESCRIPTION
 
-EPP is the Extensible Provisioning Protocol. EPP (defined in RFC 3730) is an
+EPP is the Extensible Provisioning Protocol. EPP (defined in RFC 4930) is an
 application layer client-server protocol for the provisioning and management of
 objects stored in a shared central repository. Specified in XML, the protocol
 defines generic object management operations and an extensible framework that
@@ -96,11 +96,11 @@ The objects currently registered are:
 
 =head1 AUTHOR
 
-Gavin Brown (L<epp@centralnic.com>) for CentralNic Ltd (http://www.centralnic.com/).
+CentralNic Ltd (http://www.centralnic.com/).
 
 =head1 COPYRIGHT
 
-This module is (c) 2006 CentralNic Ltd. This module is free software; you can
+This module is (c) 2007 CentralNic Ltd. This module is free software; you can
 redistribute it and/or modify it under the same terms as Perl itself.
 
 =head1 SEE ALSO
@@ -111,7 +111,7 @@ redistribute it and/or modify it under the same terms as Perl itself.
 
 =item * the L<Net::EPP::Client> module, for communicating with EPP servers.
 
-=item * RFCs 3730 and RFC 3734, available from L<http://www.ietf.org/>.
+=item * RFCs 4930 and RFC 4934, available from L<http://www.ietf.org/>.
 
 =item * The CentralNic EPP site at L<http://www.centralnic.com/resellers/epp>.
 

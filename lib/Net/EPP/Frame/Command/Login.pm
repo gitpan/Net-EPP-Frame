@@ -1,8 +1,8 @@
-# Copyright (c) 2006 CentralNic Ltd. All rights reserved. This program is
+# Copyright (c) 2007 CentralNic Ltd. All rights reserved. This program is
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Login.pm,v 1.4 2007/02/21 13:25:52 gavin Exp $
+# $Id: Login.pm,v 1.5 2007/12/03 11:44:52 gavin Exp $
 package Net::EPP::Frame::Command::Login;
 use base qw(Net::EPP::Frame::Command);
 use strict;
@@ -67,11 +67,11 @@ sub options { $_[0]->getNode('options') }
 
 =head1 AUTHOR
 
-Gavin Brown (L<epp@centralnic.com>) for CentralNic Ltd (http://www.centralnic.com/).
+CentralNic Ltd (http://www.centralnic.com/).
 
 =head1 COPYRIGHT
 
-This module is (c) 2006 CentralNic Ltd. This module is free software; you can
+This module is (c) 2007 CentralNic Ltd. This module is free software; you can
 redistribute it and/or modify it under the same terms as Perl itself.
 
 =head1 SEE ALSO

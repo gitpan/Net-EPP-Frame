@@ -1,8 +1,8 @@
-# Copyright (c) 2006 CentralNic Ltd. All rights reserved. This program is
+# Copyright (c) 2007 CentralNic Ltd. All rights reserved. This program is
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Frame.pm,v 1.13 2007/02/21 13:25:52 gavin Exp $
+# $Id: Frame.pm,v 1.15 2007/12/03 11:44:51 gavin Exp $
 package Net::EPP::Frame;
 use Carp;
 use Net::EPP::Frame::Command;
@@ -16,7 +16,7 @@ use base qw(XML::LibXML::Document);
 use vars qw($VERSION $EPP_URN $SCHEMA_URI);
 use strict;
 
-our $VERSION	= '0.09';
+our $VERSION	= '0.11';
 our $EPP_URN	= 'urn:ietf:params:xml:ns:epp-1.0';
 our $SCHEMA_URI	= 'http://www.w3.org/2001/XMLSchema-instance';
 
@@ -111,7 +111,7 @@ Net::EPP::Frame - An EPP XML frame system built on top of L<XML::LibXML>.
 
 =head1 DESCRIPTION
 
-EPP is the Extensible Provisioning Protocol. EPP (defined in RFC 3730) is an
+EPP is the Extensible Provisioning Protocol. EPP (defined in RFC 4930) is an
 application layer client-server protocol for the provisioning and management of
 objects stored in a shared central repository. Specified in XML, the protocol
 defines generic object management operations and an extensible framework that
@@ -151,7 +151,7 @@ These classes also have convenience methods, so for the above example, you can
 call the C<$login-E<gt>clID> and C<$login-E<gt>pw> methods to get the
 L<XML::LibXML::Node> objects correesponding to those elements.
 
-=head2 Rationale
+=head2 RATIONALE
 
 You could just as easily construct your EPP frames from templates or just lots
 of C<printf()> calls. But using a programmatic approach such as this strongly
@@ -309,11 +309,11 @@ Coverage for all combinations of command and object type is not complete, but wo
 
 =head1 AUTHOR
 
-Gavin Brown (L<epp@centralnic.com>) for CentralNic Ltd (http://www.centralnic.com/).
+CentralNic Ltd (http://www.centralnic.com/).
 
 =head1 COPYRIGHT
 
-This module is (c) 2006 CentralNic Ltd. This module is free software; you can
+This module is (c) 2007 CentralNic Ltd. This module is free software; you can
 redistribute it and/or modify it under the same terms as Perl itself.
 
 =head1 SEE ALSO
@@ -328,7 +328,7 @@ redistribute it and/or modify it under the same terms as Perl itself.
 
 =item * the L<Net::EPP::Frame::ObjectSpec> module, for managing EP object metadata.
 
-=item * RFCs 3730 and RFC 3734, available from L<http://www.ietf.org/>.
+=item * RFCs 4930 and RFC 4934, available from L<http://www.ietf.org/>.
 
 =item * The CentralNic EPP site at L<http://www.centralnic.com/resellers/epp>.
 

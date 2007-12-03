@@ -1,8 +1,8 @@
-# Copyright (c) 2006 CentralNic Ltd. All rights reserved. This program is
+# Copyright (c) 2007 CentralNic Ltd. All rights reserved. This program is
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 # 
-# $Id: Contact.pm,v 1.1 2006/07/12 13:11:54 gavin Exp $
+# $Id: Contact.pm,v 1.2 2007/12/03 11:44:52 gavin Exp $
 package Net::EPP::Frame::Command::Create::Contact;
 use base qw(Net::EPP::Frame::Command::Create);
 use Net::EPP::Frame::ObjectSpec;
@@ -129,11 +129,11 @@ sub addEl {
 
 =head1 AUTHOR
 
-Gavin Brown (L<epp@centralnic.com>) for CentralNic Ltd (http://www.centralnic.com/).
+CentralNic Ltd (http://www.centralnic.com/).
 
 =head1 COPYRIGHT
 
-This module is (c) 2006 CentralNic Ltd. This module is free software; you can
+This module is (c) 2007 CentralNic Ltd. This module is free software; you can
 redistribute it and/or modify it under the same terms as Perl itself.
 
 =head1 SEE ALSO
